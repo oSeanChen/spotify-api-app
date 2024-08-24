@@ -1,0 +1,45 @@
+<div th:fragment="content">
+    <style>
+        .album-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .album-item {
+            width: 200px;
+            text-align: center;
+        }
+
+        .album-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .album-image:hover {
+            transform: scale(1.1);
+        }
+
+        .album-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <h1 style="text-align: center;">用戶熱門的歌手</h1>
+    <p th:text="${'歌手數量: ' + artistsInfo.size()}" style="text-align: center;"></p>
+    <div th:if="${artistsInfo.isEmpty()}" style="text-align: center;">
+        <p>沒有找到熱門歌手資料。</p>
+    </div>
+    <div th:unless="${artistsInfo.isEmpty()}" class="album-container">
+        <div th:each="artist : ${artistsInfo}" class="album-item">
+            <a th:href="${artist.externalUrls}" target="_blank">
+                <img th:src="${artist.image}" alt="歌手封面" class="album-image">
+            </a>
+            <div class="album-name" th:text="${artist.name}">歌手名稱</div>
+        </div>
+    </div>
+</div>
+

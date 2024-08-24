@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.SpotifyHttpManager;
+import se.michaelthelin.spotify.enums.AuthorizationScope;
 
 import java.net.URI;
 
@@ -32,4 +33,10 @@ public class SpotifyConfig {
                 .build();
     }
 
+    public AuthorizationScope[] getScopes() {
+        return new AuthorizationScope[] {
+                AuthorizationScope.USER_TOP_READ,
+                AuthorizationScope.USER_LIBRARY_READ
+        };
+    }
 }
