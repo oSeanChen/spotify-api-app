@@ -1,37 +1,36 @@
 package com.oseanchen.spotifyapiapp.entity;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-
-@Entity
 @Table(name = "USER_DETAILS")
-@Getter
-@Setter
+@Entity
+@Data
+@EntityListeners(AuditingEntityListener.class)
 public class UserDetails implements Serializable {
     private static final long serialVersionUID = 3937414011943770889L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "ACCESS_TOKEN")
+    @Column(name = "access_token")
     private String accessToken;
 
-    @Column(name = "REFRESH_TOKEN")
+    @Column(name = "refresh_token")
     private String refreshToken;
 
-    @Column(name = "REF_ID")
+    @Column(name = "ref_id")
     private String refId;
 
-    // More information as per your need
+    @CreatedDate
+    @Column(name = "created_time")
+    private LocalDateTime createdTime;
 
 }

@@ -3,7 +3,6 @@ package com.oseanchen.spotifyapiapp.controller;
 
 import com.oseanchen.spotifyapiapp.config.SpotifyConfig;
 import com.oseanchen.spotifyapiapp.entity.UserDetails;
-import com.oseanchen.spotifyapiapp.entity.UserDetailsRepository;
 import com.oseanchen.spotifyapiapp.service.SpotifyService;
 import com.oseanchen.spotifyapiapp.service.UserProfileService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.michaelthelin.spotify.SpotifyApi;
-import se.michaelthelin.spotify.enums.AuthorizationScope;
 import se.michaelthelin.spotify.model_objects.credentials.AuthorizationCodeCredentials;
 import se.michaelthelin.spotify.model_objects.specification.*;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
@@ -124,7 +122,7 @@ public class SpotifyController {
     }
 
     @GetMapping("/userTopArtists")
-    public  String userTopArtists(@RequestParam String refId, Model model) {
+    public String userTopArtists(@RequestParam String refId, Model model) {
         Artist[] topArtists = spotifyService.getCurrentUserTopArtists(refId);
 
         List<Map<String, String>> artistsInfo = Arrays.stream(topArtists)
@@ -144,7 +142,7 @@ public class SpotifyController {
     }
 
     @GetMapping("/userTopTracks")
-    public  String userTopTracks(@RequestParam String refId, Model model) {
+    public String userTopTracks(@RequestParam String refId, Model model) {
         Track[] topTracks = spotifyService.getCurrentUserTopTracks(refId);
 
         List<Map<String, String>> tracksInfo = Arrays.stream(topTracks)

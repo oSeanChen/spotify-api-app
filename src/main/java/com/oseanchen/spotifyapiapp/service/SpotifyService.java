@@ -62,6 +62,7 @@ public class SpotifyService {
         }
         return new SavedTrack[0];
     }
+
     public Artist[] getCurrentUserTopArtists(String refId) {
         SpotifyApi object = getSpotifyObject(refId);
 
@@ -81,7 +82,6 @@ public class SpotifyService {
         }
         return new Artist[0];
     }
-
 
 
     private SpotifyApi getSpotifyObject(String refId) {
