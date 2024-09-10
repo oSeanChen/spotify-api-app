@@ -89,6 +89,20 @@
             margin-right: 5px;
         }
 
+        .logoutBtn {
+            background-color: #333;
+            color: white;
+            padding: 5px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logoutBtn:hover {
+            background-color: #ba3434;
+        }
+
         /* 手機裝置樣式 */
         @media (max-width: 768px) {
             .sidebar {
@@ -108,6 +122,10 @@
 
             .main-content {
                 padding-top: 60px;
+            }
+
+            .logoutBtn {
+                margin-top: 20px;
             }
         }
 
@@ -139,6 +157,8 @@
             <li><a th:href="@{/userTopArtists(refId=${refId})}">熱門歌手</a></li>
             <li><a th:href="@{/userSavedTracks(refId=${refId})}">保存的歌曲</a></li>
             <li><a th:href="@{/userSavedAlbums(refId=${refId})}">保存的專輯</a></li>
+            <li><a th:href="@{/recommendationTracks(refId=${refId})}">推薦歌曲</a></li>
+            <button onclick="logout()" class="logoutBtn">登出</button>
         </ul>
     </div>
     <div class="main-content">
@@ -155,6 +175,10 @@
 <script>
     function toggleMenu() {
         document.querySelector('.sidebar').classList.toggle('sidebar-collapsed');
+    }
+
+    function logout() {
+        window.location.href = '/logout';
     }
 </script>
 </body>

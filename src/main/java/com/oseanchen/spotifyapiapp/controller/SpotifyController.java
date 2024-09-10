@@ -6,8 +6,10 @@ import com.oseanchen.spotifyapiapp.entity.UserDetails;
 import com.oseanchen.spotifyapiapp.service.SpotifyService;
 import com.oseanchen.spotifyapiapp.service.UserProfileService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,6 +81,12 @@ public class SpotifyController {
 
         response.sendRedirect("userTopTracks?refId=" + userDetails.getRefId());
         return ResponseEntity.status(HttpStatus.OK).body(userDetails);
+    }
+
+    @GetMapping("/logout")
+    public String logoutHandler(final HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 
     @GetMapping("/userSavedAlbums")
@@ -160,4 +168,25 @@ public class SpotifyController {
         model.addAttribute("refId", refId);
         return "layout";
     }
+
+    @GetMapping("/recommendationTracks")
+    public String recommendation(@RequestParam String refId, Model model) {
+        Track[] recommendationTracks = spotifyService.getRecommendation(refId);
+        List<Map<String, String>> tracksInfo = Arrays.stream(recommendationTracks)
+                .map(track -> {
+                    Map<String, String> info = new HashMap<>();
+                    info.put("name", track.getName());
+                    info.put("image", track.getAlbum().getImages()[0].getUrl());
+                    info.put("externalUrls", track.getExternalUrls().get("spotify"));
+                    return info;
+                })
+                .collect(Collectors.toList());
+
+        model.addAttribute("tracksInfo", tracksInfo);
+        model.addAttribute("view", "recommend");
+        model.addAttribute("refId", refId);
+        return "layout";
+    }
+
+
 }
