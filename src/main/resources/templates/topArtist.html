@@ -29,6 +29,16 @@
         }
     </style>
     <h1 style="text-align: center;">用戶熱門的歌手</h1>
+    <form method="get" action="/userTopArtists" style="text-align: center; margin-bottom: 20px;">
+        <input type="hidden" name="refId" th:value="${refId}" />
+        <label for="timeRange">選擇時間範圍：</label>
+        <select id="timeRange" name="timeRange">
+            <option value="short_term" th:selected="${timeRange == 'short_term'}">短期 (4 周內)</option>
+            <option value="medium_term" th:selected="${timeRange == 'medium_term'}">中期 (6 個月內)</option>
+            <option value="long_term" th:selected="${timeRange == 'long_term'}">長期 (所有時間)</option>
+        </select>
+        <button type="submit">查詢</button>
+    </form>
     <p th:text="${'歌手數量: ' + artistsInfo.size()}" style="text-align: center;"></p>
     <div th:if="${artistsInfo.isEmpty()}" style="text-align: center;">
         <p>沒有找到熱門歌手資料。</p>

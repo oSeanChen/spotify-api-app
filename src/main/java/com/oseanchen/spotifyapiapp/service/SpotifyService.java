@@ -70,13 +70,13 @@ public class SpotifyService {
         return new SavedTrack[0];
     }
 
-    public Artist[] getCurrentUserTopArtists(String refId) {
+    public Artist[] getCurrentUserTopArtists(String refId, String timeRange) {
         SpotifyApi object = getSpotifyObject(refId);
 
         final GetUsersTopArtistsRequest getUsersTopArtistsRequest = object.getUsersTopArtists()
                 .limit(20)
                 .offset(0)
-                .time_range("short_term")
+                .time_range(timeRange)
                 .build();
 
         try {
@@ -100,13 +100,13 @@ public class SpotifyService {
         return object;
     }
 
-    public Track[] getCurrentUserTopTracks(String refId) {
+    public Track[] getCurrentUserTopTracks(String refId, String timeRange) {
         SpotifyApi object = getSpotifyObject(refId);
 
         final GetUsersTopTracksRequest getUsersTopTracksRequest = object.getUsersTopTracks()
                 .limit(20)
                 .offset(0)
-                .time_range("short_term")
+                .time_range(timeRange)
                 .build();
 
         try {

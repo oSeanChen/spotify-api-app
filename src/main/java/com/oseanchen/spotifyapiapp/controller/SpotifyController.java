@@ -130,8 +130,8 @@ public class SpotifyController {
     }
 
     @GetMapping("/userTopArtists")
-    public String userTopArtists(@RequestParam String refId, Model model) {
-        Artist[] topArtists = spotifyService.getCurrentUserTopArtists(refId);
+    public String userTopArtists(@RequestParam String refId, Model model, String timeRange) {
+        Artist[] topArtists = spotifyService.getCurrentUserTopArtists(refId, timeRange);
 
         List<Map<String, String>> artistsInfo = Arrays.stream(topArtists)
                 .map(artist -> {
@@ -150,8 +150,8 @@ public class SpotifyController {
     }
 
     @GetMapping("/userTopTracks")
-    public String userTopTracks(@RequestParam String refId, Model model) {
-        Track[] topTracks = spotifyService.getCurrentUserTopTracks(refId);
+    public String userTopTracks(@RequestParam String refId, Model model, String timeRange) {
+        Track[] topTracks = spotifyService.getCurrentUserTopTracks(refId, timeRange);
 
         List<Map<String, String>> tracksInfo = Arrays.stream(topTracks)
                 .map(track -> {
