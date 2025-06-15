@@ -146,6 +146,7 @@ public class SpotifyController {
         model.addAttribute("artistsInfo", artistsInfo);
         model.addAttribute("view", "topArtist");
         model.addAttribute("refId", refId);
+        model.addAttribute("timeRange", timeRange);
         return "layout";
     }
 
@@ -166,6 +167,7 @@ public class SpotifyController {
         model.addAttribute("tracksInfo", tracksInfo);
         model.addAttribute("view", "topTrack");
         model.addAttribute("refId", refId);
+        model.addAttribute("timeRange", timeRange);
         return "layout";
     }
 
